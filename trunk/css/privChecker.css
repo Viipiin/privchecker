@@ -1,0 +1,145 @@
+body
+{
+    background:#000;
+    font-family:verdana;
+    text-align: center;
+}
+.logo
+{
+    padding:10px 1.2%;
+    font-size:30px;
+    color:#fff;
+    position:absolute;
+}
+.ui-tabs .ui-tabs-panel {
+	background-image:url('background.jpg');
+	background-size: 100% 100%;
+	border: 2px solid #999;
+}
+#privtitle
+{
+    color:#D4525C;
+}
+.subtitle
+{
+    color:#B8AE98;
+    font-size:14px;
+	font-weight:lighter;
+}
+.tabContainer
+{
+    width:98%;
+    height:560px;			
+    margin: 0 auto;
+}        
+#tabs
+{
+    top: 10px;
+}
+#userSearchDiv
+{
+    position:relative;
+    top:220px;
+    margin:0 auto;
+    width:380px;
+    background:#fff;
+    border:2px solid #ccc;
+    text-align:left;
+	padding:0px 0 0 20px;
+}
+#searchBox
+{
+    margin:20px 20px 20px 0px;
+	width: 260px;
+}
+#searchButton {
+    background-image:url('keybutton.jpg');
+    background-size: 100% 100%;
+    margin:20px 0px;
+    width:54px;
+    height:32px;
+}
+#searchButton:hover{
+    cursor:hand;
+    background-image:url('keybuttonhover.jpg');			
+}
+#currentUser {
+	color:#fff;
+	position: absolute;
+	right: 2.5%;
+	text-align:left;
+	top:20px;
+}		
+#details, #browseTable{
+	text-align:left;	
+	background:#56514D;
+	height:520px;
+	margin-top:20px;
+	overflow:hidden;
+}
+#details{
+	width:342px;
+	float:left;
+	color: white;
+	margin-left:20px;
+}
+#browseTable {	
+	width:860px;
+	float: right;
+	margin-right: 20px;
+}
+#breadcrumbList, #itemCount {
+	margin:4px 8px;
+	float:left;
+}
+.selectedBreadcrumb{
+	color: #fff;
+}
+.breadcrumb:hover {
+	color:#eee;
+}
+.selectedRow
+{
+    background:#D4525C;
+}
+#browseFilter
+{
+	float:right;
+	font-size:14px;
+	margin:4px 8px;
+	width:160px;
+}
+.tableContainer{
+	height:460px;
+	overflow:auto;
+	width:856px;
+	margin:0px 2px;
+	background:#fff;
+}
+.datatable
+{
+    font-family:verdana;
+	background:#fff;
+	width:100%;
+}
+.datatable thead
+{
+	text-align:left;
+	background:#fff;
+	font-size
+}
+.datatable td
+{
+	font-size:12px;
+	padding-left:8px;
+	border-top: 1px solid #eee;
+}
+.datatable .subtitle {
+	color:#D4525C;
+}
+#tableTitle{
+	float:left;
+	color: #fff;
+	padding: 8px;
+	font-size: 14px;
+}
