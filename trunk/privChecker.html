@@ -1,0 +1,172 @@
+<html>
+    <head>
+        <script src="js/jquery-1.7.1.min.js" type="text/javascript" ></script>
+		<script src="js/jquery.tmpl.min.js" type="text/javascript" ></script>
+        <script src="js/jquery-ui-1.8.17.custom.min.js" type="text/javascript" ></script>
+        <script src="js/knockout.js" type="text/javascript"></script>		
+		
+        <link href="css/ui-lightness/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
+		<link href="css/privChecker.css" rel="stylesheet" />
+    </head>
+    
+    <body>
+        <div class="logo">
+            <img id="key" src="css/key.png"></img>
+            <span id="privtitle">priv</span><span id="checkertitle">checker</span>
+            <div class="subtitle">COMPLETE PERMISSION REPORTING</div>
+        </div>
+        
+		<div id="currentUser" data-bind="visible: showUser">
+			<div class="subtitle">CHECKING:</div>
+			<span data-bind="text: displayname"></span>
+		</div>
+		
+        <div id="tabs">
+        
+            <ul id="tabList">
+                <li><a href="#userTab">CHOOSE<br/>USER</a></li>
+                <li><a href="#browseTab">BROWSE<br/>PRIVS</a></li>
+                <li><a href="#fullTab">FULL<br/>REPORT</a></li>
+                <li><a href="#exportTab">EXPORT<br/>PRIVS</a></li>
+            </ul>
+            
+            <div id="userTab" class="tabContainer">
+
+                <div id="userSearchDiv">					
+                    <input id="searchBox" value="Site Collection User..."/>
+					<input id="hiddenName" type="hidden" />
+                    <button id="searchButton" data-bind="click: getSites"></button>
+                </div>
+
+            </div>
+            
+            <div id="browseTab" class="tabContainer">
+			
+				<div id="browseTable">
+					<div id="titleBar">
+						<span id="breadcrumbList">
+						
+							<a class="subtitle breadcrumb"  href="#" data-bind="text: siteCollection,
+																				click: showSites, 
+																				css: { selectedBreadcrumb: tableContext() == 'sites' }"></a>
+							
+							<span class="subtitle" data-bind="visible: (tableContext() == 'lists') || (tableContext() == 'items')">>
+							<a class="subtitle breadcrumb"  href="#" data-bind="text: site().Name,
+																				click: showLists, 
+																				css: { selectedBreadcrumb: tableContext() == 'lists' }">
+																				</a></span>														
+							
+							<span class="subtitle" data-bind="visible: (tableContext() == 'items')">>
+							<a class="subtitle breadcrumb"  href="#" data-bind="text: list().Name,
+																				click: showListItems, 
+																				css: { selectedBreadcrumb: tableContext() == 'items' }">
+																				</a></span>
+						</span>
+						<input id="browseFilter" data-bind="value: browseFilter, event: { keyup: setBrowseFilter }" />
+					</div>				
+					<div class="tableContainer">
+						<table class="datatable" cellspacing="0" cellpadding="4px">
+							<thead>
+								<tr>
+									<th><a class="subtitle" href="#" data-bind="click: sortTitle">TITLE</a></th>
+									<th><a class="subtitle" href="#" data-bind="click: sortRole">ACCESS</a></th>
+									<th><a class="subtitle" href="#" data-bind="click: sortUrl">URL</a></th>
+								</tr>
+							</thead>
+							
+							<!--SITES TABLE-->	
+							<tbody data-bind="foreach: sitesToShow, visible: tableContext() == 'sites'">													
+								<tr data-bind="click: $root.setSite, css: { selectedRow: ID == $root.site().ID }">
+									<td><a href="#" data-bind="text: Name, click: $root.showLists"></a></td>	
+									<td data-bind="text: Permission"></td>
+									<td><a href="#" data-bind="text: Url, attr: { href: Url }"></a></td>
+								</tr>								
+							</tbody>
+							
+							<!--LISTS TABLE-->
+							<tbody data-bind="foreach: listsToShow, visible: tableContext() == 'lists'">
+								<tr data-bind="css: { selectedRow: ID == $root.list().ID }, click: $root.setList">
+									<td><a href="#" data-bind="text: Name, click: $root.showListItems"></a></td>
+									<td data-bind="text: Permission"></td>
+									<td><a href="#" data-bind="text: Url, attr: { href: Url }"></a></td>
+								</tr>     
+							</tbody>
+
+							<!--LIST ITEMS TABLE-->
+							<tbody data-bind="foreach: itemsToShow, visible: tableContext() == 'items'">
+								<tr data-bind="css: { selectedRow: ID == $root.listitem().ID }, click: $root.setListItem">
+									<td><a href="#" data-bind="text: Name"></a></td>
+									<td data-bind="text: Permission"></td>
+									<td><a href="#" data-bind="text: Url, attr: { href: Url }"></a></td>
+								</tr>     
+							</tbody>
+
+						</table>
+					</div>
+					
+					<div id="itemCount" class="subtitle breadcrumb" style="color:#fff" data-bind="text: countText()">
+					</div>
+					
+				</div>
+				
+				<div id="details">
+				
+				</div>
+            </div>
+            
+            <div id="fullTab" class="tabContainer">	
+            </div>
+            
+            <div id="exportTab" class="tabContainer">	
+            </div>
+            
+        </div>
+                
+    </body>
+	
+	<script  type="text/javascript">
+		$("#tabs").tabs();
+		
+		//todo: change autocomplete source to handler
+		var users = [{"id":"QG\\APETERSENA","value":"APETERSENA"},{"id":"QG\\rlcrom","value":"Crom, Ron"},{"id":"QG\\dmlenz","value":"Lenz, Daniel"},{"id":"QG\\nllogan","value":"Logan, Nichole"},{"id":"QG\\apetersen","value":"Petersen, Andrew"},{"id":"QG\\jpose","value":"Pose, Jim"},{"id":"QG\\bwelden","value":"Welden, Benjamin"}];
+		
+		$("#searchBox").autocomplete({
+			source: users,
+			minLength: 2,
+			focus: function (event, ui) {
+				$("#searchBox").val(ui.item.id);
+				return false;
+			},
+			select: function (event, ui) {
+				$("#searchBox").val(ui.item.id);
+				$("#hiddenName").val(ui.item.value);
+				return false;
+			}
+		}).focus(function() {
+			if($("#searchBox").val() == "Site Collection User...")
+			{
+				$("#searchBox").val("");
+			}
+		}).blur(function() {
+			if($("#searchBox").val() == "")
+			{
+				$("#searchBox").val("Site Collection User...");
+			}
+		});
+		
+		$("#browseFilter").focus(function() {
+			if($("#browseFilter").val() == "filter...")
+			{
+				$("#browseFilter").val("");
+			}
+		}).blur(function() {
+			if($("#browseFilter").val() == "")
+			{
+				$("#browseFilter").val("filter...");
+			}
+		});
+
+    </script>
+	<script src="js/privChecker.js" type="text/javascript"></script>
+
+</html>
