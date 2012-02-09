@@ -98,10 +98,7 @@ body
 .breadcrumb:hover {
 	color:#eee;
 }
-.selectedRow
-{
-    background:#D4525C;
-}
+
 #browseFilter
 {
 	float:right;
@@ -132,10 +129,28 @@ body
 {
 	font-size:12px;
 	padding-left:8px;
-	border-top: 1px solid #eee;
+	border-top: 1px dotted #efefef;
+	border-bottom: 1px solid #fff;
+}
+.datatable td a {
+	color:#56514D;
 }
 .datatable .subtitle {
 	color:#D4525C;
+	margin-left: 12px;
+	text-decoration:none;
+}
+.hoverRow td
+{
+	background:#fcf4b5;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+}
+.selectedRow td
+{
+    border-top:1px solid #D4525C;
+	border-bottom:1px solid #D4525C;
+	background:#feff99;
 }
 #tableTitle{
 	float:left;

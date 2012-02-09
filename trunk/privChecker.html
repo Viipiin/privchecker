@@ -4,6 +4,7 @@
 		<script src="js/jquery.tmpl.min.js" type="text/javascript" ></script>
         <script src="js/jquery-ui-1.8.17.custom.min.js" type="text/javascript" ></script>
         <script src="js/knockout.js" type="text/javascript"></script>		
+		<script src="js/datasource.js" type="text/javascript"></script>
 		
         <link href="css/ui-lightness/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
 		<link href="css/privChecker.css" rel="stylesheet" />
@@ -76,7 +77,9 @@
 							
 							<!--SITES TABLE-->	
 							<tbody data-bind="foreach: sitesToShow, visible: tableContext() == 'sites'">													
-								<tr data-bind="click: $root.setSite, css: { selectedRow: ID == $root.site().ID }">
+								<tr data-bind="click: $root.setSite, 
+												css: { selectedRow: ID == $root.site().ID, hoverRow: ID == $root.hoverRow().ID},
+												event: { mouseover: $root.setHover, mouseout: $root.removeHover}">
 									<td><a href="#" data-bind="text: Name, click: $root.getLists"></a></td>	
 									<td data-bind="text: Role"></td>
 									<td><a href="#" data-bind="text: Url, attr: { href: Url }"></a></td>
@@ -85,7 +88,9 @@
 							
 							<!--LISTS TABLE-->
 							<tbody data-bind="foreach: listsToShow, visible: tableContext() == 'lists'">
-								<tr data-bind="css: { selectedRow: ID == $root.list().ID }, click: $root.setList">
+								<tr data-bind="click: $root.setList,
+												css: { selectedRow: ID == $root.list().ID , hoverRow: ID == $root.hoverRow().ID },
+												event: { mouseover: $root.setHover}">
 									<td><a href="#" data-bind="text: Name, click: $root.getListItems"></a></td>
 									<td data-bind="text: Role"></td>
 									<td><a href="#" data-bind="text: Url, attr: { href: Url }"></a></td>
@@ -94,7 +99,9 @@
 
 							<!--LIST ITEMS TABLE-->
 							<tbody data-bind="foreach: itemsToShow, visible: tableContext() == 'items'">
-								<tr data-bind="css: { selectedRow: ID == $root.listitem().ID }, click: $root.setListItem">
+								<tr data-bind="click: $root.setListItem,
+												css: { selectedRow: ID == $root.listitem().ID, hoverRow: ID == $root.hoverRow().ID }, 
+												event: { mouseover: $root.setHover}">
 									<td><a href="#" data-bind="text: Name"></a></td>
 									<td data-bind="text: Role"></td>
 									<td><a href="#" data-bind="text: Url, attr: { href: Url }"></a></td>
@@ -128,8 +135,8 @@
 		$("#tabs").tabs();
 				
 		$("#searchBox").autocomplete({
-		    //source: users,
-            source: "/_layouts/privchecker/usersjson.ashx",
+		    source: usersarray,
+            //source: "/_layouts/privchecker/usersjson.ashx",
             minLength: 2,
             delay:200,
 			focus: function (event, ui) {
@@ -164,6 +171,7 @@
 				$("#browseFilter").val("filter...");
 			}
 		});
+		
 
     </script>
 	<script src="js/privChecker.js" type="text/javascript"></script>

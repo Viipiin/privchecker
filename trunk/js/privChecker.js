@@ -7,18 +7,19 @@ function PermissionsViewModel() {
 	
     self.siteCollection = ko.observable("http://sxqic3");
 	
-    self.sites = ko.observableArray(null);
+    self.sites = ko.observableArray([]);
 	self.site = ko.observable({ ID: -1 });
 
-	self.lists = ko.observableArray(null);
+	self.lists = ko.observableArray([]);
 	self.list = ko.observable( { ID: -1 });
 
-	self.listitems = ko.observableArray(null);
+	self.listitems = ko.observableArray([]);
 	self.listitem = ko.observable( { ID: -1 });
 
 	self.browseFilter = ko.observable("filter...");
 	self.tableContext = ko.observable("");
 	
+	self.hoverRow = ko.observable({ ID: -1});
 
 	//Computed	
 	self.tableTitle = ko.computed(function () {
@@ -95,7 +96,7 @@ function PermissionsViewModel() {
 			if (self.browseFilter() == "" || self.browseFilter() == "filter..."){
 				return self.listitems().length + " ITEMS";
 			}
-			return "SHOWING " + self.listItemsToShow().length + " OF " + self.listitems().length + " LISTS";		
+			return "SHOWING " + self.itemsToShow().length + " OF " + self.listitems().length + " LISTS";		
 		}
 	});
 
@@ -110,6 +111,13 @@ function PermissionsViewModel() {
 		self.username($("#searchBox").val());
 		self.displayname($("#hiddenName").val());
     };
+	
+	self.setHover = function(arg) {
+		self.hoverRow(arg);
+	}
+	self.removeHover = function() {
+		self.hoverRow({ID: -1});
+	}
 
     self.setSite = function (arg) {
 		//set values
@@ -120,7 +128,7 @@ function PermissionsViewModel() {
 		self.listitem({ ID: -1 });
 
     }
-
+	
     self.setList = function (arg) {
         //set values
 		self.list(arg);
@@ -137,34 +145,35 @@ function PermissionsViewModel() {
 	//DATA ACCESS
     self.getSites = function () {
         self.setUser();
+		self.sites(sitesarray);
+		self.tableContext("sites");
 
-        $.get('/_layouts/privchecker/permissionjson.ashx', { user: self.username, type: "sitecoll" }, function (data) {
-            var array = eval(data);
-            self.sites(array);
-            self.tableContext("sites");
-        });
+        //$.get('/_layouts/privchecker/permissionjson.ashx', { user: self.username, type: "sitecoll" }, function (data) {
+            //var array = eval(data);
+            //self.sites(array);
+            //self.tableContext("sites");
+        //});
 
     };
 
     self.getLists = function (site) {
-
-        $.get('/_layouts/privchecker/permissionjson.ashx', { user: self.username, webid: site.ID, type: "web" }, function (data) {
-
-            var array = eval(data);
-            self.lists(array);
-            self.showLists();
-
-        });
+		self.lists(listsarray);
+		self.showLists();
+        //$.get('/_layouts/privchecker/permissionjson.ashx', { user: self.username, webid: site.ID, type: "web" }, function (data) {
+          //  var array = eval(data);
+            //self.lists(array);
+            //self.showLists();
+        //});
     }
 
     self.getListItems = function (list) {
-        $.get('/_layouts/privchecker/permissionjson.ashx', { user: self.username, type: "list", webid: self.site().ID, listid: list.ID }, function (data) {
-
-            var array = eval(data);
-            self.listitems(array);
-
-            self.showListItems();
-        });
+		self.listitems(listitemsarray);
+		self.showListItems();
+        //$.get('/_layouts/privchecker/permissionjson.ashx', { user: self.username, type: "list", webid: self.site().ID, listid: list.ID }, function (data) {
+            //var array = eval(data);
+            //self.listitems(array);
+            //self.showListItems();
+        //});
     }
 
 	
@@ -183,7 +192,11 @@ function PermissionsViewModel() {
         self.browseFilter("filter...");
         self.tableContext("items");
     }
-
+	
+	self.zebraTable = function () {
+		alert("here");
+		$(".datatable tr:nth-child(odd)").addClass("hoverRow");
+	}
 	
 	//Sorting
 	self.sortTitle = function() {
