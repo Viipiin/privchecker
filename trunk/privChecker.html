@@ -77,8 +77,8 @@
 							<!--SITES TABLE-->	
 							<tbody data-bind="foreach: sitesToShow, visible: tableContext() == 'sites'">													
 								<tr data-bind="click: $root.setSite, css: { selectedRow: ID == $root.site().ID }">
-									<td><a href="#" data-bind="text: Name, click: $root.showLists"></a></td>	
-									<td data-bind="text: Permission"></td>
+									<td><a href="#" data-bind="text: Name, click: $root.getLists"></a></td>	
+									<td data-bind="text: Role"></td>
 									<td><a href="#" data-bind="text: Url, attr: { href: Url }"></a></td>
 								</tr>								
 							</tbody>
@@ -86,8 +86,8 @@
 							<!--LISTS TABLE-->
 							<tbody data-bind="foreach: listsToShow, visible: tableContext() == 'lists'">
 								<tr data-bind="css: { selectedRow: ID == $root.list().ID }, click: $root.setList">
-									<td><a href="#" data-bind="text: Name, click: $root.showListItems"></a></td>
-									<td data-bind="text: Permission"></td>
+									<td><a href="#" data-bind="text: Name, click: $root.getListItems"></a></td>
+									<td data-bind="text: Role"></td>
 									<td><a href="#" data-bind="text: Url, attr: { href: Url }"></a></td>
 								</tr>     
 							</tbody>
@@ -96,7 +96,7 @@
 							<tbody data-bind="foreach: itemsToShow, visible: tableContext() == 'items'">
 								<tr data-bind="css: { selectedRow: ID == $root.listitem().ID }, click: $root.setListItem">
 									<td><a href="#" data-bind="text: Name"></a></td>
-									<td data-bind="text: Permission"></td>
+									<td data-bind="text: Role"></td>
 									<td><a href="#" data-bind="text: Url, attr: { href: Url }"></a></td>
 								</tr>     
 							</tbody>
@@ -126,13 +126,12 @@
 	
 	<script  type="text/javascript">
 		$("#tabs").tabs();
-		
-		//todo: change autocomplete source to handler
-		var users = [{"id":"QG\\APETERSENA","value":"APETERSENA"},{"id":"QG\\rlcrom","value":"Crom, Ron"},{"id":"QG\\dmlenz","value":"Lenz, Daniel"},{"id":"QG\\nllogan","value":"Logan, Nichole"},{"id":"QG\\apetersen","value":"Petersen, Andrew"},{"id":"QG\\jpose","value":"Pose, Jim"},{"id":"QG\\bwelden","value":"Welden, Benjamin"}];
-		
+				
 		$("#searchBox").autocomplete({
-			source: users,
-			minLength: 2,
+		    //source: users,
+            source: "/_layouts/privchecker/usersjson.ashx",
+            minLength: 2,
+            delay:200,
 			focus: function (event, ui) {
 				$("#searchBox").val(ui.item.id);
 				return false;
