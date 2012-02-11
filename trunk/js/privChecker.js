@@ -140,6 +140,10 @@ function PermissionsViewModel() {
     self.setListItem = function (arg) {
         self.listitem(arg);
     }
+	self.getRoleClass = function (arg) {
+		var rolename = arg.Role;
+		return "roleColor " + rolename.replace(" ", "");
+	}
 
 	
 	//DATA ACCESS
@@ -147,13 +151,14 @@ function PermissionsViewModel() {
         self.setUser();
 		self.sites(sitesarray);
 		self.tableContext("sites");
-
+		$("#tabs").tabs('select', 1);
         //$.get('/_layouts/privchecker/permissionjson.ashx', { user: self.username, type: "sitecoll" }, function (data) {
             //var array = eval(data);
             //self.sites(array);
             //self.tableContext("sites");
         //});
 
+		
     };
 
     self.getLists = function (site) {

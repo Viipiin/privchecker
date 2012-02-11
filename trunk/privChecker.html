@@ -36,15 +36,21 @@
                 <div id="userSearchDiv">					
                     <input id="searchBox" value="Site Collection User..."/>
 					<input id="hiddenName" type="hidden" />
-                    <button id="searchButton" data-bind="click: getSites"></button>
+                    <button type="submit" id="searchButton" data-bind="click: getSites"></button>
                 </div>
 
             </div>
             
             <div id="browseTab" class="tabContainer">
-			
-				<div id="browseTable">
-					<div id="titleBar">
+				
+				<div id="noUser" data-bind="visible: (sites().length == 0)">
+					<div class="message">
+						You have to pick a user first!
+					</div>
+				</div>
+				
+				<div id="browseTable" data-bind="visible: sites().length > 0">
+					<div class="titleBar">					
 						<span id="breadcrumbList">
 						
 							<a class="subtitle breadcrumb"  href="#" data-bind="text: siteCollection,
@@ -64,13 +70,15 @@
 																				</a></span>
 						</span>
 						<input id="browseFilter" data-bind="value: browseFilter, event: { keyup: setBrowseFilter }" />
-					</div>				
+					</div>
+					
 					<div class="tableContainer">
 						<table class="datatable" cellspacing="0" cellpadding="4px">
 							<thead>
 								<tr>
+									<th><span></span></th>
 									<th><a class="subtitle" href="#" data-bind="click: sortTitle">TITLE</a></th>
-									<th><a class="subtitle" href="#" data-bind="click: sortRole">ACCESS</a></th>
+									<th><a class="subtitle" href="#" data-bind="click: sortRole">ACCESS</a></th>									
 									<th><a class="subtitle" href="#" data-bind="click: sortUrl">URL</a></th>
 								</tr>
 							</thead>
@@ -80,8 +88,9 @@
 								<tr data-bind="click: $root.setSite, 
 												css: { selectedRow: ID == $root.site().ID, hoverRow: ID == $root.hoverRow().ID},
 												event: { mouseover: $root.setHover, mouseout: $root.removeHover}">
-									<td><a href="#" data-bind="text: Name, click: $root.getLists"></a></td>	
-									<td data-bind="text: Role"></td>
+									<td><span data-bind="attr: { 'class': 'roleClass ' + Role}"></span>									
+									<td><a href="#" data-bind="text: Name, click: $root.getLists"></a></td>
+									<td data-bind="text: Role"></td>									
 									<td><a href="#" data-bind="text: Url, attr: { href: Url }"></a></td>
 								</tr>								
 							</tbody>
@@ -91,6 +100,7 @@
 								<tr data-bind="click: $root.setList,
 												css: { selectedRow: ID == $root.list().ID , hoverRow: ID == $root.hoverRow().ID },
 												event: { mouseover: $root.setHover}">
+									<td><span data-bind="attr: { 'class': 'roleClass ' + Role}"></span>
 									<td><a href="#" data-bind="text: Name, click: $root.getListItems"></a></td>
 									<td data-bind="text: Role"></td>
 									<td><a href="#" data-bind="text: Url, attr: { href: Url }"></a></td>
@@ -102,6 +112,7 @@
 								<tr data-bind="click: $root.setListItem,
 												css: { selectedRow: ID == $root.listitem().ID, hoverRow: ID == $root.hoverRow().ID }, 
 												event: { mouseover: $root.setHover}">
+									<td><span data-bind="attr: { 'class': 'roleClass ' + Role}"></span>
 									<td><a href="#" data-bind="text: Name"></a></td>
 									<td data-bind="text: Role"></td>
 									<td><a href="#" data-bind="text: Url, attr: { href: Url }"></a></td>
@@ -117,7 +128,58 @@
 				</div>
 				
 				<div id="details">
-				
+					<div class="titlebar subtitle" style="color:#fff">
+						<span style="margin: 6px 8px">DETAILS</span>
+					</div>
+					
+					<div id="detailsContainer">
+					
+						<!--SITE DETAILS-->
+						<span data-bind="if: tableContext() == 'sites'">
+							<ul class="basePermissions" data-bind="foreach: site().BasePermissions">
+								<li data-bind="text: $data"></li>
+							</ul>
+							<div class="permissionLevels" data-bind="foreach: site().Permissions">
+								<span data-bind="text: Member"></span>
+								<ul data-bind="foreach: Levels">								
+									<li >
+										<span data-bind="text: $data"></span>
+									</li>
+								</ul>							
+							</div>						
+						</span>
+						
+						<!--LIST DETAILS-->
+						<span data-bind="if: tableContext() == 'lists'">
+							<ul class="basePermissions" data-bind="foreach: list().BasePermissions">
+								<li data-bind="text: $data"></li>
+							</ul>
+							<div class="permissionLevels" data-bind="foreach: list().Permissions">
+								<span data-bind="text: Member"></span>
+								<ul data-bind="foreach: Levels">								
+									<li >
+										<span data-bind="text: $data"></span>
+									</li>
+								</ul>							
+							</div>						
+						</span>
+						
+						<!--LIST ITEMS DETAILS-->
+						<span data-bind="if: tableContext() == 'items'">
+							<ul class="basePermissions" data-bind="foreach: listitem().BasePermissions">
+								<li data-bind="text: $data"></li>
+							</ul>
+							<div class="permissionLevels" data-bind="foreach: listitem().Permissions">
+								<span data-bind="text: Member"></span>
+								<ul data-bind="foreach: Levels">								
+									<li >
+										<span data-bind="text: $data"></span>
+									</li>
+								</ul>							
+							</div>						
+						</span>
+						
+					</div>						
 				</div>
             </div>
             

@@ -61,7 +61,7 @@ body
 }
 #searchButton:hover{
     cursor:hand;
-    background-image:url('keybuttonhover.jpg');			
+    opacity: .7;			
 }
 #currentUser {
 	color:#fff;
@@ -80,8 +80,10 @@ body
 #details{
 	width:20%;
 	float:left;
-	color: white;
 	margin-left:20px;
+}
+#details .titlebar{
+	color: white;
 }
 #browseTable {	
 	width:70%;
@@ -109,9 +111,17 @@ body
 .tableContainer{
 	height:460px;
 	overflow:auto;
-	width:99%;
+	width:100%;
 	margin:0px 2px;
 	background:#fff;
+}
+#detailsContainer{
+
+	overflow:auto;
+	background:#fff;
+	margin:0px 2px;
+	height:488px;
+	font-size:12px;
 }
 .datatable
 {
@@ -125,6 +135,10 @@ body
 	background:#fff;
 	font-size
 }
+.titleBar
+{
+	height:30px;
+}
 .datatable td
 {
 	font-size:12px;
@@ -134,27 +148,70 @@ body
 }
 .datatable td a {
 	color:#56514D;
+	text-decoration:none
 }
 .datatable .subtitle {
 	color:#D4525C;
 	margin-left: 12px;
-	text-decoration:none;
 }
 .hoverRow td
 {
-	background:#fcf4b5;
+	background:#f4f4f4;
 	border-top: 1px solid #eee;
 	border-bottom: 1px solid #eee;
 }
+
+.datatable .selectedRow td a {
+	color:#fff;
+}
+#userSearchDiv {
+	-webkit-box-shadow: 3px 3px 15px 2px rgba(0, 0, 0, .5);
+	-moz-box-shadow: 3px 3px 15px 2px rgba(0, 0, 0, .5);
+	box-shadow: 3px 3px 15px 2px rgba(0, 0, 0, .5);
+}
 .selectedRow td
 {
-    border-top:1px solid #D4525C;
-	border-bottom:1px solid #D4525C;
-	background:#feff99;
+    border-top:1px solid #000;
+	border-bottom:1px solid #000;
+	background:#D4525C;
+	color:#fff;
+	text-shadow: 1px 1px 2px #000000;
 }
 #tableTitle{
 	float:left;
 	color: #fff;
 	padding: 8px;
 	font-size: 14px;
+}
+.roleClass {
+	width:15px;
+	height:10px;
+	background:#fff;
+	display:block;
+	border: 1px solid #56514D;
+	padding-left:2px;
+}
+.roleClass {
+	border: 1px solid #ffffff;
+}
+.None{
+	background:#D7545A;
+}
+.Guest{
+	background:#F29D28;
+}
+.Reader{
+	background:#F1F752;
+}
+.Contributor{
+	background:#ABED83;
+}
+.WebDesigner{
+	background:#ABED83;
+}
+.Administrator {
+	background:#17B637;
+}
+.Custom{
+	background:#BF8DFF;
 }
