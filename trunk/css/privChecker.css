@@ -36,21 +36,25 @@ body
 {
     top: 10px;
 }
-#userSearchDiv
-{
-    position:relative;
-    top:220px;
-    margin:0 auto;
-    width:380px;
-    background:#fff;
-    border:2px solid #ccc;
-    text-align:left;
-	padding:0px 0 0 20px;
+#usersearchdiv {
+position: relative;
+top: 200px;
+margin: 0 auto;
+width: 480px;
+background: white;
+border: 3px solid #D4525C;
+text-align: left;
+padding: 0px 0 0 20px;
+-webkit-box-shadow: 3px 3px 15px 2px rgba(0, 0, 0, .5);
+-moz-box-shadow: 3px 3px 15px 2px rgba(0, 0, 0, .5);
+box-shadow: 3px 3px 15px 2px rgba(0, 0, 0, .5);
 }
 #searchBox
 {
-    margin:20px 20px 20px 0px;
-	width: 260px;
+margin: 40px 60px;
+width: 360px;
+font-size: 25px;
+padding: 6px;
 }
 #searchButton {
     background-image:url('keybutton.jpg');
@@ -143,7 +147,7 @@ body
 {
 	font-size:12px;
 	padding-left:8px;
-	border-top: 1px dotted #efefef;
+	border-top: 1px dotted #ddd;
 	border-bottom: 1px solid #fff;
 }
 .datatable td a {
@@ -164,11 +168,6 @@ body
 .datatable .selectedRow td a {
 	color:#fff;
 }
-#userSearchDiv {
-	-webkit-box-shadow: 3px 3px 15px 2px rgba(0, 0, 0, .5);
-	-moz-box-shadow: 3px 3px 15px 2px rgba(0, 0, 0, .5);
-	box-shadow: 3px 3px 15px 2px rgba(0, 0, 0, .5);
-}
 .selectedRow td
 {
     border-top:1px solid #000;
@@ -188,10 +187,10 @@ body
 	height:10px;
 	background:#fff;
 	display:block;
-	border: 1px solid #56514D;
+	border: 1px solid #36312D;
 	padding-left:2px;
 }
-.roleClass {
+.selectedRow .roleClass {
 	border: 1px solid #ffffff;
 }
 .None{
@@ -214,4 +213,14 @@ body
 }
 .Custom{
 	background:#BF8DFF;
+}
+.basePermissions {
+	background:#e3e3e3;
+	line-height:3;
+}
+.basePermission {
+	margin: 8px;
+}
+.loading {
+background:url('loading.gif') no-repeat right center;
 }

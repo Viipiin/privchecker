@@ -25,12 +25,10 @@ function PermissionsViewModel() {
 	self.tableTitle = ko.computed(function () {
 		if (self.tableContext() == "sites"){
 			return self.siteCollection();
-		}
-		
+		}		
 		else if (self.tableContext() == "lists"){
 			return self.site().Name;
-		}
-		
+		}		
 		else if (self.tableContext() == "items"){
 			return self.list().Name;
 		}
@@ -107,14 +105,10 @@ function PermissionsViewModel() {
 		return true;
 	}
 	
-	self.setUser = function () {
-		self.username($("#searchBox").val());
-		self.displayname($("#hiddenName").val());
-    };
-	
 	self.setHover = function(arg) {
 		self.hoverRow(arg);
 	}
+	
 	self.removeHover = function() {
 		self.hoverRow({ID: -1});
 	}
@@ -140,6 +134,8 @@ function PermissionsViewModel() {
     self.setListItem = function (arg) {
         self.listitem(arg);
     }
+	
+	//TODO: Replace this with images
 	self.getRoleClass = function (arg) {
 		var rolename = arg.Role;
 		return "roleColor " + rolename.replace(" ", "");
@@ -147,24 +143,29 @@ function PermissionsViewModel() {
 
 	
 	//DATA ACCESS
-    self.getSites = function () {
-        self.setUser();
+    self.getSites = function () {		
+		$('#searchBox').blur(); //necessary for IE
+		
+		//Hardcoded Array
 		self.sites(sitesarray);
 		self.tableContext("sites");
 		$("#tabs").tabs('select', 1);
+		
         //$.get('/_layouts/privchecker/permissionjson.ashx', { user: self.username, type: "sitecoll" }, function (data) {
             //var array = eval(data);
             //self.sites(array);
             //self.tableContext("sites");
-        //});
-
-		
-    };
+			//$("#tabs").tabs('select', 1);
+        //});		
+    }
 
     self.getLists = function (site) {
+		
+		//Hardcoded array
 		self.lists(listsarray);
 		self.showLists();
-        //$.get('/_layouts/privchecker/permissionjson.ashx', { user: self.username, webid: site.ID, type: "web" }, function (data) {
+        
+		//$.get('/_layouts/privchecker/permissionjson.ashx', { user: self.username, webid: site.ID, type: "web" }, function (data) {
           //  var array = eval(data);
             //self.lists(array);
             //self.showLists();
@@ -172,8 +173,11 @@ function PermissionsViewModel() {
     }
 
     self.getListItems = function (list) {
+	
+		//Hardcoded array
 		self.listitems(listitemsarray);
 		self.showListItems();
+		
         //$.get('/_layouts/privchecker/permissionjson.ashx', { user: self.username, type: "list", webid: self.site().ID, listid: list.ID }, function (data) {
             //var array = eval(data);
             //self.listitems(array);
@@ -202,6 +206,7 @@ function PermissionsViewModel() {
 		alert("here");
 		$(".datatable tr:nth-child(odd)").addClass("hoverRow");
 	}
+	
 	
 	//Sorting
 	self.sortTitle = function() {
@@ -255,4 +260,5 @@ function PermissionsViewModel() {
 
 };
 
-ko.applyBindings(new PermissionsViewModel());
+mymodel = new PermissionsViewModel();
+ko.applyBindings(mymodel);
