@@ -147,11 +147,13 @@ function PermissionsViewModel() {
 	//DATA ACCESS
     self.getSites = function () {		
 		$('#searchBox').blur(); //necessary for IE
-		
+		//clear selected site if its a username change
+		self.site({ ID: -1 });
 		//Hardcoded Array
 		self.sites(sitesarray);
 		self.tableContext("sites");
 		$("#tabs").tabs('select', 1);
+		
 		
         //$.get('/_layouts/privchecker/permissionjson.ashx', { user: self.username, type: "sitecoll" }, function (data) {
             //var array = eval(data);

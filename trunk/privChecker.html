@@ -45,10 +45,10 @@
 				<div id="browseTable" data-bind="visible: sites().length > 0">
 					<div class="titleBar">					
 						<span id="breadcrumbList">
-						
-							<a class="subtitle breadcrumb"  href="#" data-bind="text: siteCollection,
+							
+							<span class="subtitle"><a class="subtitle breadcrumb"  href="#" data-bind="text: siteCollection,
 																				click: showSites, 
-																				css: { selectedBreadcrumb: tableContext() == 'sites' }"></a>
+																				css: { selectedBreadcrumb: tableContext() == 'sites' }"></a></span>
 							
 							<span class="subtitle" data-bind="visible: (tableContext() == 'lists') || (tableContext() == 'items')">>
 							<a class="subtitle breadcrumb"  href="#" data-bind="text: site().Name,
@@ -69,24 +69,38 @@
 						<table class="datatable" cellspacing="0" cellpadding="4px">
 							<thead>
 								<tr>
-									<th><span></span></th>
-									<th><a class="subtitle" href="#" data-bind="click: sortTitle">TITLE</a></th>
+									<th style="border-bottom: 2px solid #fff;"><span></span></th>
+									<th>
+										<a class="subtitle" href="#" data-bind="click: sortTitle">TITLE</a>
+									</th>
 									<!--<th><a class="subtitle" href="#" data-bind="click: sortRole">ACCESS</a></th>-->									
 									<th><a class="subtitle" href="#" data-bind="click: sortUrl">URL</a></th>
-									<th><span></span></th>
+		
 								</tr>
 							</thead>
 							
 							<!--SITES TABLE-->	
 							<tbody data-bind="foreach: sitesToShow, visible: tableContext() == 'sites', stripe: sitesToShow, evenClass: 'even', oddClass: 'odd'">													
 								<tr data-bind="click: $root.setSite, 
-												css: { selectedRow: ID == $root.site().ID },
+												css: { selectedRow: ID == $root.site().ID, hoverRow: ID == $root.hoverRow().ID},
 												event: { mouseover: $root.setHover, mouseout: $root.removeHover}">
+									
 									<td class='iconCell' ><img class="roleImage" data-bind="attr: { 'src': 'css/' + Role + '.jpg'}"/></td>									
-									<td><a class='titleLink' href="#" data-bind="text: Name, click: $root.getLists"></a></td>
-									<!--<td data-bind="text: Role"></td>-->									
-									<td><a href="#" data-bind="text: Url, attr: { href: Url }"></a></td>
-									<td><a href="#" style="color:#D4525C; text-decoration:underline;">Manage Permissions</a></td>
+									
+									<td>
+										<a class='titleLink' href="#" data-bind="text: Name, click: $root.getLists"></a>
+									</td>
+								
+									<td>
+										<a class="url" href="#" data-bind="text: Url, attr: { href: Url }"></a>
+										
+										<div class="menu" data-bind="visible: ID == $root.site().ID">
+											<a class="subtitle" href="#">MANAGE PRIVS</a>
+											<a class="subtitle" style="line-height:2.2" href="#">GO TO ITEM</a>
+										</div>
+										
+									</td>
+									
 								</tr>								
 							</tbody>
 							
@@ -96,9 +110,19 @@
 												css: { selectedRow: ID == $root.list().ID , hoverRow: ID == $root.hoverRow().ID },
 												event: { mouseover: $root.setHover}">
 									<td class='iconCell'><img class="roleImage" data-bind="attr: { 'src': 'css/' + Role + '.jpg'}"/></td>
+									
 									<td><a class='titleLink' href="#" data-bind="text: Name, click: $root.getListItems"></a></td>
-									<!--<td data-bind="text: Role"></td>-->
-									<td><a href="#" data-bind="text: Url, attr: { href: Url }"></a></td>
+
+									<td>
+										<a class="url" href="#" data-bind="text: Url, attr: { href: Url }"></a>
+										
+										<div class="menu" data-bind="visible: ID == $root.list().ID">
+											<a class="subtitle" href="#">MANAGE PRIVS</a>
+											<a class="subtitle" style="line-height:2.2" href="#">GO TO ITEM</a>
+										</div>
+										
+									</td>									
+									
 								</tr>     
 							</tbody>
 
@@ -109,8 +133,17 @@
 												event: { mouseover: $root.setHover}">
 									<td class='iconCell'><img class="roleImage" data-bind="attr: { 'src': 'css/' + Role + '.jpg'}"/></td>
 									<td><a class='titleLink' href="#" data-bind="text: Name"></a></td>
-									<!--<td data-bind="text: Role"></td>-->
-									<td><a href="#" data-bind="text: Url, attr: { href: Url }"></a></td>
+
+									<td>
+										<a class="url" href="#" data-bind="text: Url, attr: { href: Url }"></a>
+										
+										<div class="menu" data-bind="visible: ID == $root.listitem().ID">
+											<a class="subtitle" href="#">MANAGE PRIVS</a>
+											<a class="subtitle" style="line-height:2.2" href="#">GO TO ITEM</a>
+										</div>
+										
+									</td>									
+									
 								</tr>     
 							</tbody>
 
