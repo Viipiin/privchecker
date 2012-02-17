@@ -98,7 +98,9 @@ function PermissionsViewModel() {
 		}
 	});
 
-	
+	self.roleImage = function(arg) {
+		return "/css/" + arg.Role + ".jpg";
+	}
 	//Setters
 	self.setBrowseFilter = function(data, event) {
 		self.browseFilter($("#browseFilter").val());
@@ -258,7 +260,23 @@ function PermissionsViewModel() {
 		}
     };
 
+
 };
+
+
+ko.bindingHandlers.stripe = {
+    update: function(element, valueAccessor, allBindingsAccessor) {
+        var value = ko.utils.unwrapObservable(valueAccessor()); //creates the dependency
+        var allBindings = allBindingsAccessor();
+        var even = allBindings.evenClass;
+        var odd = allBindings.oddClass;
+
+        //update odd rows
+        $(element).children(":nth-child(odd)").addClass(odd).removeClass(even);
+        //update even rows
+        $(element).children(":nth-child(even)").addClass(even).removeClass(odd);;
+    }
+}
 
 mymodel = new PermissionsViewModel();
 ko.applyBindings(mymodel);

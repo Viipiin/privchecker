@@ -44,29 +44,19 @@ width: 480px;
 background: white;
 border: 3px solid #D4525C;
 text-align: left;
-padding: 0px 0 0 20px;
 -webkit-box-shadow: 3px 3px 15px 2px rgba(0, 0, 0, .5);
 -moz-box-shadow: 3px 3px 15px 2px rgba(0, 0, 0, .5);
 box-shadow: 3px 3px 15px 2px rgba(0, 0, 0, .5);
 }
 #searchBox
 {
-margin: 40px 60px;
+margin: 0px 60px 30px 60px;
 width: 360px;
 font-size: 25px;
 padding: 6px;
+height:48px;
 }
-#searchButton {
-    background-image:url('keybutton.jpg');
-    background-size: 100% 100%;
-    margin:20px 0px;
-    width:54px;
-    height:32px;
-}
-#searchButton:hover{
-    cursor:hand;
-    opacity: .7;			
-}
+
 #currentUser {
 	color:#fff;
 	position: absolute;
@@ -136,8 +126,7 @@ padding: 6px;
 .datatable thead
 {
 	text-align:left;
-	background:#fff;
-	font-size
+	background:#D4525C;
 }
 .titleBar
 {
@@ -147,16 +136,31 @@ padding: 6px;
 {
 	font-size:12px;
 	padding-left:8px;
-	border-top: 1px dotted #ddd;
-	border-bottom: 1px solid #fff;
 }
 .datatable td a {
 	color:#56514D;
-	text-decoration:none
+	text-decoration:none;
+	padding:6px;
+}
+.datatable td a.titleLink {
+
+}
+.datatable td a:hover {
+	text-decoration:underline
+}
+.datatable td.iconCell {
+	width:22px;
 }
 .datatable .subtitle {
-	color:#D4525C;
+	color:#fff;
 	margin-left: 12px;
+}
+
+.odd td {
+	background:#f2f2f2;
+}
+.even td {
+	background:#fafafa;
 }
 .hoverRow td
 {
@@ -182,37 +186,12 @@ padding: 6px;
 	padding: 8px;
 	font-size: 14px;
 }
-.roleClass {
-	width:15px;
-	height:10px;
-	background:#fff;
-	display:block;
-	border: 1px solid #36312D;
-	padding-left:2px;
+.roleImage {
+	width:20px;
+	height:20px;
 }
 .selectedRow .roleClass {
 	border: 1px solid #ffffff;
-}
-.None{
-	background:#D7545A;
-}
-.Guest{
-	background:#F29D28;
-}
-.Reader{
-	background:#F1F752;
-}
-.Contributor{
-	background:#ABED83;
-}
-.WebDesigner{
-	background:#ABED83;
-}
-.Administrator {
-	background:#17B637;
-}
-.Custom{
-	background:#BF8DFF;
 }
 .basePermissions {
 	background:#e3e3e3;
@@ -223,4 +202,19 @@ padding: 6px;
 }
 .loading {
 background:url('loading.gif') no-repeat right center;
+}
+.search {
+background:url('search.jpg') no-repeat right center;
+}
+#userlabel {
+width: 80px;
+height: 26px;
+background: #D4525C;
+color: white;
+font-size: 20px;
+text-align: center;
+font-weight:light;
+margin: 30px 60px 10px;
+padding:4px;
+
 }

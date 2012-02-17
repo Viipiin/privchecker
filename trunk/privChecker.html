@@ -33,7 +33,8 @@
             
             <div id="userTab" class="tabContainer">
 
-                <div id="userSearchDiv">					
+                <div id="userSearchDiv">
+					<div id="userLabel">People</div>
                     <input id="searchBox" value="Site Collection User..."/>
                 </div>
 
@@ -70,43 +71,45 @@
 								<tr>
 									<th><span></span></th>
 									<th><a class="subtitle" href="#" data-bind="click: sortTitle">TITLE</a></th>
-									<th><a class="subtitle" href="#" data-bind="click: sortRole">ACCESS</a></th>									
+									<!--<th><a class="subtitle" href="#" data-bind="click: sortRole">ACCESS</a></th>-->									
 									<th><a class="subtitle" href="#" data-bind="click: sortUrl">URL</a></th>
+									<th><span></span></th>
 								</tr>
 							</thead>
 							
 							<!--SITES TABLE-->	
-							<tbody data-bind="foreach: sitesToShow, visible: tableContext() == 'sites'">													
+							<tbody data-bind="foreach: sitesToShow, visible: tableContext() == 'sites', stripe: sitesToShow, evenClass: 'even', oddClass: 'odd'">													
 								<tr data-bind="click: $root.setSite, 
-												css: { selectedRow: ID == $root.site().ID, hoverRow: ID == $root.hoverRow().ID},
+												css: { selectedRow: ID == $root.site().ID },
 												event: { mouseover: $root.setHover, mouseout: $root.removeHover}">
-									<td><span data-bind="attr: { 'class': 'roleClass ' + Role}"></span>									
-									<td><a href="#" data-bind="text: Name, click: $root.getLists"></a></td>
-									<td data-bind="text: Role"></td>									
+									<td class='iconCell' ><img class="roleImage" data-bind="attr: { 'src': 'css/' + Role + '.jpg'}"/></td>									
+									<td><a class='titleLink' href="#" data-bind="text: Name, click: $root.getLists"></a></td>
+									<!--<td data-bind="text: Role"></td>-->									
 									<td><a href="#" data-bind="text: Url, attr: { href: Url }"></a></td>
+									<td><a href="#" style="color:#D4525C; text-decoration:underline;">Manage Permissions</a></td>
 								</tr>								
 							</tbody>
 							
 							<!--LISTS TABLE-->
-							<tbody data-bind="foreach: listsToShow, visible: tableContext() == 'lists'">
+							<tbody data-bind="foreach: listsToShow, visible: tableContext() == 'lists', stripe: listsToShow, evenClass: 'even', oddClass: 'odd'">
 								<tr data-bind="click: $root.setList,
 												css: { selectedRow: ID == $root.list().ID , hoverRow: ID == $root.hoverRow().ID },
 												event: { mouseover: $root.setHover}">
-									<td><span data-bind="attr: { 'class': 'roleClass ' + Role}"></span>
-									<td><a href="#" data-bind="text: Name, click: $root.getListItems"></a></td>
-									<td data-bind="text: Role"></td>
+									<td class='iconCell'><img class="roleImage" data-bind="attr: { 'src': 'css/' + Role + '.jpg'}"/></td>
+									<td><a class='titleLink' href="#" data-bind="text: Name, click: $root.getListItems"></a></td>
+									<!--<td data-bind="text: Role"></td>-->
 									<td><a href="#" data-bind="text: Url, attr: { href: Url }"></a></td>
 								</tr>     
 							</tbody>
 
 							<!--LIST ITEMS TABLE-->
-							<tbody data-bind="foreach: itemsToShow, visible: tableContext() == 'items'">
+							<tbody data-bind="foreach: itemsToShow, visible: tableContext() == 'items', stripe: itemsToShow, evenClass: 'even', oddClass: 'odd'">
 								<tr data-bind="click: $root.setListItem,
 												css: { selectedRow: ID == $root.listitem().ID, hoverRow: ID == $root.hoverRow().ID }, 
 												event: { mouseover: $root.setHover}">
-									<td><span data-bind="attr: { 'class': 'roleClass ' + Role}"></span>
-									<td><a href="#" data-bind="text: Name"></a></td>
-									<td data-bind="text: Role"></td>
+									<td class='iconCell'><img class="roleImage" data-bind="attr: { 'src': 'css/' + Role + '.jpg'}"/></td>
+									<td><a class='titleLink' href="#" data-bind="text: Name"></a></td>
+									<!--<td data-bind="text: Role"></td>-->
 									<td><a href="#" data-bind="text: Url, attr: { href: Url }"></a></td>
 								</tr>     
 							</tbody>
@@ -205,8 +208,8 @@
             //source: "/_layouts/privchecker/usersjson.ashx",
             minLength: 2,
             delay:200,
-			search: function(){$(this).addClass('loading');},
-			open: function(){$(this).removeClass('loading');},
+			search: function(){$(this).removeClass('search').addClass('loading');},
+			open: function(){$(this).removeClass('loading').addClass('search');},
 			focus: function (event, ui) {
 				$("#searchBox").val(ui.item.id);
 				return false;
@@ -222,12 +225,12 @@
 				$(this).val("");
 			}
 		}).blur(function() {
-			$(this).removeClass('loading');
+			$(this).removeClass('loading').addClass('search');
 			if($(this).val() == "")
 			{
 				$(this).val("Site Collection User...");
 			}
-		});
+		}).focus().addClass('search');
 		
 		$("#browseFilter").focus(function() {
 			if($("#browseFilter").val() == "filter...")
