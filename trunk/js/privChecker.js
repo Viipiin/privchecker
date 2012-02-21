@@ -211,7 +211,9 @@ function PermissionsViewModel() {
 		$(".datatable tr:nth-child(odd)").addClass("hoverRow");
 	}
 	
+	//Utilities
 	
+	self.array
 	//Sorting
 	self.sortTitle = function() {
 		
