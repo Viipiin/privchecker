@@ -68,32 +68,40 @@
 						
 						<!--LIST DETAILS-->
 						<span data-bind="if: tableContext() == 'lists'">
-							<ul class="basePermissions" data-bind="foreach: list().BasePermissions">
-								<li data-bind="text: $data"></li>
+						
+							<div class="title" data-bind="text: list().Name"></div>
+							
+							<div class="basePermissions" data-bind="foreach: list().BasePermissions">
+								<span class="basePermission" data-bind="text: $data"></span>							
+							</div>
+							<ul class="permissionLevels" data-bind="foreach: list().Permissions">
+								<li>
+									<p>
+										<em data-bind="text: Member"></em>
+										<span data-bind="text: Levels.join(' | ')"></span>
+									</p>
+								</li>					
 							</ul>
-							<div class="permissionLevels" data-bind="foreach: list().Permissions">
-								<span data-bind="text: Member"></span>
-								<ul data-bind="foreach: Levels">								
-									<li >
-										<span data-bind="text: $data"></span>
-									</li>
-								</ul>							
-							</div>						
+												
 						</span>
 						
 						<!--LIST ITEMS DETAILS-->
 						<span data-bind="if: tableContext() == 'items'">
-							<ul class="basePermissions" data-bind="foreach: listitem().BasePermissions">
-								<li data-bind="text: $data"></li>
+						
+							<div class="title" data-bind="text: listitem().Name"></div>
+							
+							<div class="basePermissions" data-bind="foreach: listitem().BasePermissions">
+								<span class="basePermission" data-bind="text: $data"></span>							
+							</div>
+							<ul class="permissionLevels" data-bind="foreach: listitem().Permissions">
+								<li>
+									<p>
+										<em data-bind="text: Member"></em>
+										<span data-bind="text: Levels.join(' | ')"></span>
+									</p>
+								</li>					
 							</ul>
-							<div class="permissionLevels" data-bind="foreach: listitem().Permissions">
-								<span data-bind="text: Member"></span>
-								<ul data-bind="foreach: Levels">								
-									<li >
-										<span data-bind="text: $data"></span>
-									</li>
-								</ul>							
-							</div>						
+					
 						</span>
 						
 					</div>						
@@ -123,7 +131,7 @@
 					
 					<div class="tableContainer">
 						<table class="datatable" cellspacing="0" cellpadding="4px">
-							<thead>
+							<thead style="display:none">
 								<tr>
 									<th style="border-bottom: 2px solid #fff;"><span></span></th>
 									<th>
@@ -131,6 +139,7 @@
 									</th>
 									<!--<th><a class="subtitle" href="#" data-bind="click: sortRole">ACCESS</a></th>-->									
 									<th><a class="subtitle" href="#" data-bind="click: sortUrl">URL</a></th>
+									<th><span></span></th>
 		
 								</tr>
 							</thead>
@@ -148,13 +157,11 @@
 									</td>
 								
 									<td>
-										<a class="url" href="#" data-bind="text: Url, attr: { href: Url }"></a>
-										
-										<div class="menu" data-bind="visible: ID == $root.site().ID">
-											<a class="subtitle" href="#">MANAGE PRIVS</a>
-											<a class="subtitle" style="line-height:2.2" href="#">GO TO ITEM</a>
-										</div>
-										
+										<a class="url" href="#" data-bind="text: Url, attr: { href: Url }"></a>									
+									</td>
+									
+									<td>
+										<a class="subtitle" style="font-size:11px" href="#">MANAGE PRIVS</a>
 									</td>
 									
 								</tr>								
@@ -171,12 +178,10 @@
 
 									<td>
 										<a class="url" href="#" data-bind="text: Url, attr: { href: Url }"></a>
-										
-										<div class="menu" data-bind="visible: ID == $root.list().ID">
-											<a class="subtitle" href="#">MANAGE PRIVS</a>
-											<a class="subtitle" style="line-height:2.2" href="#">GO TO ITEM</a>
-										</div>
-										
+									</td>	
+
+									<td>
+										<a class="subtitle" style="font-size:11px" href="#">MANAGE PRIVS</a>
 									</td>									
 									
 								</tr>     
@@ -192,12 +197,10 @@
 
 									<td>
 										<a class="url" href="#" data-bind="text: Url, attr: { href: Url }"></a>
-										
-										<div class="menu" data-bind="visible: ID == $root.listitem().ID">
-											<a class="subtitle" href="#">MANAGE PRIVS</a>
-											<a class="subtitle" style="line-height:2.2" href="#">GO TO ITEM</a>
-										</div>
-										
+									</td>
+
+									<td>
+										<a class="subtitle" style="font-size:11px" href="#">MANAGE PRIVS</a>
 									</td>									
 									
 								</tr>     
@@ -276,18 +279,7 @@
 				$("#browseFilter").val("filter...");
 			}
 		});
-		
-		$( "#dialog-message" ).dialog({
-			autoOpen: false,
-			width:400,
-			modal: true,
-			buttons: {
-				Ok: function() {
-					$( this ).dialog( "close" );
-				}
-			}
-		});
-		
+
 	
 
     </script>

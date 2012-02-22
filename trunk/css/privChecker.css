@@ -93,6 +93,9 @@ height:48px;
 	background: #fff;
 	color: #fff;
 }
+#browseTable .titleBar {
+	height:40px;
+}
 .titleBar  span, #itemCount {
 	margin:4px;
 	background:#D4525C;
@@ -102,8 +105,13 @@ height:48px;
 	left: 6px;
 	float:left;
 }
+#browseTable .titleBar span
+{
+	top: 2px;
+	margin-bottom: 8px;
+}
 #itemCount {
-top: -2px;
+top: 0px;
 padding: 4px;
 }
 .breadcrumb{
@@ -121,10 +129,9 @@ padding: 4px;
 	width:160px;
 }
 .tableContainer{
-	height:450px;
+	height:442px;
 	overflow:auto;
 	width:100%;
-	margin:0px 2px;
 	background:#fff;
 }
 #detailsContainer{
@@ -154,6 +161,7 @@ padding: 4px;
 	font-size:12px;
 	padding-left:8px;
 	position:relative;
+	height:34px;
 }
 .datatable td a {
 	color:#56514D;
@@ -164,7 +172,7 @@ padding: 4px;
 
 }
 .datatable td a.titleLink {
-
+	font-size:14px;
 }
 .datatable td a:hover {
 	text-decoration:underline
@@ -180,14 +188,12 @@ padding: 4px;
 
 .odd td {
 	background:#fff;
-	border-top:2px solid #fff;
-	border-bottom:2px solid #fff;
+	border-top:1px solid #ddd;
 }
 
 .even td {
 	background:#fff;
-	border-top:2px solid #fff;
-	border-bottom:2px solid #fff;
+	border-top:1px solid #ddd;
 }
 .hoverRow2 td
 {
@@ -195,16 +201,15 @@ padding: 4px;
 }
 .hoverRow td
 {
-	background:#fafafa;
-	border-top: 2px solid #fff;
-	border-bottom: 2px solid #fff;
+	background:#ddd;
+	border-top:1px solid #ddd;
 }
 
 .selectedRow td
 {
     border-top:2px solid #D4525C;
 	border-bottom:2px solid #D4525C;
-	background:#fefafa;
+	background:#f5f5f5;
 }
 #tableTitle{
 	float:left;
@@ -252,7 +257,7 @@ padding:4px;
 }
 .menu {
 width: 124px;
-background: #fefafa;
+background: #f5f5f5;
 color: white;
 padding: 4px;
 position: absolute;
