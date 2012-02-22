@@ -22,7 +22,7 @@
 		</div>
 		
         <div id="tabs">
-        
+
             <ul id="tabList">
                 <li><a href="#userTab">CHOOSE<br/>USER</a></li>
                 <li><a href="#browseTab">BROWSE<br/>PRIVS</a></li>
@@ -40,7 +40,7 @@
             </div>
             
             <div id="browseTab" class="tabContainer">
-				
+
 				<div id="details">
 					<div class="titlebar subtitle">
 						<span>DETAILS</span>
@@ -106,7 +106,7 @@
 						
 					</div>						
 				</div>
-		
+				
 				<div id="browseTable" data-bind="visible: sites().length > 0">
 					<div class="titleBar">
 					
@@ -131,6 +131,7 @@
 					
 					<div class="tableContainer">
 						<table class="datatable" cellspacing="0" cellpadding="4px">
+
 							<thead style="display:none">
 								<tr>
 									<th style="border-bottom: 2px solid #fff;"><span></span></th>
@@ -145,7 +146,7 @@
 							</thead>
 							
 							<!--SITES TABLE-->	
-							<tbody data-bind="foreach: sitesToShow, visible: tableContext() == 'sites', stripe: sitesToShow, evenClass: 'even', oddClass: 'odd'">													
+							<tbody data-bind="foreach: sitesToShow, visible: tableContext() == 'sites'">													
 								<tr class="row" data-bind="click: $root.setSite, 
 												css: { selectedRow: ID == $root.site().ID, hoverRow: ID == $root.hoverRow().ID},
 												event: { mouseover: $root.setHover, mouseout: $root.removeHover}">
@@ -213,7 +214,7 @@
 					</span>
 					
 				</div>
-				
+
             </div>
             
             <div id="fullTab" class="tabContainer">	
@@ -224,13 +225,11 @@
             
         </div>
         
-		<div id="dialog-message" title="Empty Username" style="display:none">
+		<div id="dialog-message" title="Loading..." style="display:none">
 			<p id="dialog-main">
-				You have to pick a user first.
+				Retrieving Permissions
 			</p>
-			<p id="dialog-instruction">
-				Go back to the <b>Choose User</b> tab.
-			</p>
+			<img src="css/loading.gif">
 		</div>
 
 		
@@ -280,6 +279,11 @@
 			}
 		});
 
+		$( "#dialog-message" ).dialog({
+				autoOpen: false,
+				height: 250,
+				modal: true
+		});
 	
 
     </script>

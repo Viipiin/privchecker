@@ -162,6 +162,8 @@ padding: 4px;
 	padding-left:8px;
 	position:relative;
 	height:34px;
+	background:#fff;
+	border-top:1px solid #ddd;
 }
 .datatable td a {
 	color:#56514D;

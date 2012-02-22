@@ -147,20 +147,23 @@ function PermissionsViewModel() {
 	//DATA ACCESS
     self.getSites = function () {		
 		$('#searchBox').blur(); //necessary for IE
-		//clear selected site if its a username change
+		
+		$( "#dialog-message" ).dialog("open");
+		$("#tabs").tabs('select', 1);	
+		self.tableContext("sites");	
 		self.site({ ID: -1 });
 		//Hardcoded Array
 		self.sites(sitesarray);
-		self.tableContext("sites");
-		$("#tabs").tabs('select', 1);
-		
-		
+				
+		//self.tableContext("sites");
+		//$("#tabs").tabs('select', 1);
+		//$( "#dialog-message" ).dialog("open");
         //$.get('/_layouts/privchecker/permissionjson.ashx', { user: self.username, type: "sitecoll" }, function (data) {
             //var array = eval(data);
-            //self.sites(array);
-            //self.tableContext("sites");
-			//$("#tabs").tabs('select', 1);
-        //});		
+			//self.site({ ID: -1 });
+            //self.sites(array);     
+			//$( "#dialog-message" ).dialog("close");
+		//});		
     }
 
     self.getLists = function (site) {
@@ -205,15 +208,8 @@ function PermissionsViewModel() {
         self.browseFilter("filter...");
         self.tableContext("items");
     }
-	
-	self.zebraTable = function () {
-		alert("here");
-		$(".datatable tr:nth-child(odd)").addClass("hoverRow");
-	}
-	
-	//Utilities
-	
-	self.array
+		
+
 	//Sorting
 	self.sortTitle = function() {
 		
