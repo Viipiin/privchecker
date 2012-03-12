@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="75cb88cb-e70c-484a-8260-84948818daa5" solutionId="75cb88cb-e70c-484a-8260-84948818daa5" resetWebServer="false" name="PrivChecker" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <features>
+    <featureReference itemId="7e5e891f-88d2-4699-9f5f-8944967dd02f" />
+  </features>
+  <projectItems>
+    <projectItemReference itemId="8dba7e2e-0b70-41a7-8356-11d6061f4218" />
+  </projectItems>
+</package>

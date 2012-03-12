@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{24500388-2A45-46C1-A4AF-85A62005E926}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PrivChecker</RootNamespace>
+    <AssemblyName>PrivChecker</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{BB1F664B-9266-4fd6-B973-E1E44974B511};{14822709-B5A1-4724-98CA-57A101D1B079};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SandboxedSolution>False</SandboxedSolution>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.SharePoint" />
+    <Reference Include="Microsoft.SharePoint.Security" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Domain\AutoCompleteItem.cs" />
+    <Compile Include="Domain\ListItemPermission.cs" />
+    <Compile Include="Domain\ListPermission.cs" />
+    <Compile Include="Domain\Permission.cs" />
+    <Compile Include="Domain\SecurableObject.cs" />
+    <Compile Include="Domain\WebPermission.cs" />
+    <Compile Include="HttpHandlers\PermissionJson.cs" />
+    <Compile Include="HttpHandlers\UsersJson.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\PermissionChecker.cs" />
+    <Compile Include="Services\PermissionHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Features\Feature1\Feature1.feature">
+      <FeatureId>{7e5e891f-88d2-4699-9f5f-8944967dd02f}</FeatureId>
+    </None>
+    <None Include="key.snk" />
+    <None Include="Layouts\privChecker\.svn\all-wcprops" />
+    <None Include="Layouts\privChecker\.svn\entries" />
+    <None Include="Layouts\privChecker\.svn\text-base\privChecker.html.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\all-wcprops" />
+    <None Include="Layouts\privChecker\css\.svn\entries" />
+    <None Include="Layouts\privChecker\css\.svn\prop-base\Administrator.jpg.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\prop-base\background.jpg.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\prop-base\Contributor.jpg.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\prop-base\Custom.jpg.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\prop-base\Guest.jpg.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\prop-base\key.png.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\prop-base\keybutton.jpg.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\prop-base\keybuttondown.jpg.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\prop-base\keybuttonhover.jpg.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\prop-base\loading.gif.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\prop-base\None.jpg.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\prop-base\Reader.jpg.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\prop-base\search.jpg.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\prop-base\searchSmall.jpg.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\prop-base\Thumbs.db.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\prop-base\WebDesigner.jpg.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\text-base\Administrator.jpg.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\text-base\background.jpg.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\text-base\Contributor.jpg.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\text-base\Custom.jpg.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\text-base\Guest.jpg.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\text-base\key.png.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\text-base\keybutton.jpg.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\text-base\keybuttondown.jpg.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\text-base\keybuttonhover.jpg.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\text-base\loading.gif.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\text-base\None.jpg.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\text-base\privChecker.css.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\text-base\Reader.jpg.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\text-base\search.jpg.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\text-base\searchSmall.jpg.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\text-base\Thumbs.db.svn-base" />
+    <None Include="Layouts\privChecker\css\.svn\text-base\WebDesigner.jpg.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\.svn\all-wcprops" />
+    <None Include="Layouts\privChecker\css\ui-lightness\.svn\entries" />
+    <None Include="Layouts\privChecker\css\ui-lightness\.svn\text-base\jquery-ui-1.8.17.custom.css.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\all-wcprops" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\entries" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\prop-base\ui-bg_diagonals-thick_18_b81900_40x40.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\prop-base\ui-bg_diagonals-thick_20_666666_40x40.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\prop-base\ui-bg_flat_10_000000_40x100.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\prop-base\ui-bg_glass_100_f6f6f6_1x400.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\prop-base\ui-bg_glass_100_fdf5ce_1x400.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\prop-base\ui-bg_glass_65_ffffff_1x400.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\prop-base\ui-bg_gloss-wave_35_f6a828_500x100.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\prop-base\ui-bg_highlight-soft_100_eeeeee_1x100.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\prop-base\ui-bg_highlight-soft_75_ffe45c_1x100.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\prop-base\ui-icons_222222_256x240.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\prop-base\ui-icons_228ef1_256x240.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\prop-base\ui-icons_ef8c08_256x240.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\prop-base\ui-icons_ffd27a_256x240.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\prop-base\ui-icons_ffffff_256x240.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\text-base\ui-bg_diagonals-thick_18_b81900_40x40.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\text-base\ui-bg_diagonals-thick_20_666666_40x40.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\text-base\ui-bg_flat_10_000000_40x100.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\text-base\ui-bg_glass_100_f6f6f6_1x400.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\text-base\ui-bg_glass_100_fdf5ce_1x400.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\text-base\ui-bg_glass_65_ffffff_1x400.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\text-base\ui-bg_gloss-wave_35_f6a828_500x100.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\text-base\ui-bg_highlight-soft_100_eeeeee_1x100.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\text-base\ui-bg_highlight-soft_75_ffe45c_1x100.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\text-base\ui-icons_222222_256x240.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\text-base\ui-icons_228ef1_256x240.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\text-base\ui-icons_ef8c08_256x240.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\text-base\ui-icons_ffd27a_256x240.png.svn-base" />
+    <None Include="Layouts\privChecker\css\ui-lightness\images\.svn\text-base\ui-icons_ffffff_256x240.png.svn-base" />
+    <None Include="Layouts\privChecker\js\.svn\all-wcprops" />
+    <None Include="Layouts\privChecker\js\.svn\entries" />
+    <None Include="Layouts\privChecker\js\.svn\text-base\datasource.js.svn-base" />
+    <None Include="Layouts\privChecker\js\.svn\text-base\jquery-1.7.1.min.js.svn-base" />
+    <None Include="Layouts\privChecker\js\.svn\text-base\jquery-ui-1.8.17.custom.min.js.svn-base" />
+    <None Include="Layouts\privChecker\js\.svn\text-base\jquery.dataTables.min.js.svn-base" />
+    <None Include="Layouts\privChecker\js\.svn\text-base\jquery.tmpl.js.svn-base" />
+    <None Include="Layouts\privChecker\js\.svn\text-base\jquery.tmpl.min.js.svn-base" />
+    <None Include="Layouts\privChecker\js\.svn\text-base\knockout.js.svn-base" />
+    <None Include="Layouts\privChecker\js\.svn\text-base\privChecker.js.svn-base" />
+    <None Include="Layouts\privChecker\PermissionJson.ashx" />
+    <None Include="Layouts\privChecker\UsersJson.ashx" />
+    <None Include="Layouts\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{8dba7e2e-0b70-41a7-8356-11d6061f4218}</SharePointProjectItemId>
+    </None>
+    <None Include="Package\Package.package">
+      <PackageId>{24e5039b-a165-4472-9dc5-ebdf10bdd4f8}</PackageId>
+    </None>
+    <None Include="Package\Package.Template.xml">
+      <DependentUpon>Package.package</DependentUpon>
+    </None>
+    <None Include="Ribbon\SiteActionsItem\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{e167baac-c1fd-4e75-a1b2-e0dce617ff05}</SharePointProjectItemId>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Layouts\privChecker\.svn\prop-base\" />
+    <Folder Include="Layouts\privChecker\.svn\props\" />
+    <Folder Include="Layouts\privChecker\.svn\tmp\prop-base\" />
+    <Folder Include="Layouts\privChecker\.svn\tmp\props\" />
+    <Folder Include="Layouts\privChecker\.svn\tmp\text-base\" />
+    <Folder Include="Layouts\privChecker\css\.svn\props\" />
+    <Folder Include="Layouts\privChecker\css\.svn\tmp\prop-base\" />
+    <Folder Include="Layouts\privChecker\css\.svn\tmp\props\" />
+    <Folder Include="Layouts\privChecker\css\.svn\tmp\text-base\" />
+    <Folder Include="Layouts\privChecker\css\ui-lightness\.svn\prop-base\" />
+    <Folder Include="Layouts\privChecker\css\ui-lightness\.svn\props\" />
+    <Folder Include="Layouts\privChecker\css\ui-lightness\.svn\tmp\prop-base\" />
+    <Folder Include="Layouts\privChecker\css\ui-lightness\.svn\tmp\props\" />
+    <Folder Include="Layouts\privChecker\css\ui-lightness\.svn\tmp\text-base\" />
+    <Folder Include="Layouts\privChecker\css\ui-lightness\images\.svn\props\" />
+    <Folder Include="Layouts\privChecker\css\ui-lightness\images\.svn\tmp\prop-base\" />
+    <Folder Include="Layouts\privChecker\css\ui-lightness\images\.svn\tmp\props\" />
+    <Folder Include="Layouts\privChecker\css\ui-lightness\images\.svn\tmp\text-base\" />
+    <Folder Include="Layouts\privChecker\js\.svn\prop-base\" />
+    <Folder Include="Layouts\privChecker\js\.svn\props\" />
+    <Folder Include="Layouts\privChecker\js\.svn\tmp\prop-base\" />
+    <Folder Include="Layouts\privChecker\js\.svn\tmp\props\" />
+    <Folder Include="Layouts\privChecker\js\.svn\tmp\text-base\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Features\Feature1\Feature1.Template.xml">
+      <DependentUpon>Feature1.feature</DependentUpon>
+    </Content>
+    <Content Include="Layouts\privChecker\css\Administrator.jpg" />
+    <Content Include="Layouts\privChecker\css\background.jpg" />
+    <Content Include="Layouts\privChecker\css\Contributor.jpg" />
+    <Content Include="Layouts\privChecker\css\Custom.jpg" />
+    <Content Include="Layouts\privChecker\css\Guest.jpg" />
+    <Content Include="Layouts\privChecker\css\key.png" />
+    <Content Include="Layouts\privChecker\css\keybutton.jpg" />
+    <Content Include="Layouts\privChecker\css\keybuttondown.jpg" />
+    <Content Include="Layouts\privChecker\css\keybuttonhover.jpg" />
+    <Content Include="Layouts\privChecker\css\keyhole.png" />
+    <Content Include="Layouts\privChecker\css\keyshadowed.png" />
+    <Content Include="Layouts\privChecker\css\keySquare.jpg" />
+    <Content Include="Layouts\privChecker\css\loading.gif" />
+    <Content Include="Layouts\privChecker\css\None.jpg" />
+    <Content Include="Layouts\privChecker\css\privChecker.css" />
+    <Content Include="Layouts\privChecker\css\Reader.jpg" />
+    <Content Include="Layouts\privChecker\css\search.jpg" />
+    <Content Include="Layouts\privChecker\css\searchSmall.jpg" />
+    <Content Include="Layouts\privChecker\css\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Layouts\privChecker\css\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Layouts\privChecker\css\ui-lightness\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Layouts\privChecker\css\ui-lightness\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Layouts\privChecker\css\ui-lightness\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Layouts\privChecker\css\ui-lightness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Layouts\privChecker\css\ui-lightness\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Layouts\privChecker\css\ui-lightness\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Layouts\privChecker\css\ui-lightness\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Layouts\privChecker\css\ui-lightness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Layouts\privChecker\css\ui-lightness\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="Layouts\privChecker\css\ui-lightness\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Layouts\privChecker\css\ui-lightness\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Layouts\privChecker\css\ui-lightness\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Layouts\privChecker\css\ui-lightness\jquery-ui-1.8.17.custom.css" />
+    <Content Include="Layouts\privChecker\css\WebDesigner.jpg" />
+    <Content Include="Layouts\privChecker\js\datasource.js" />
+    <Content Include="Layouts\privChecker\js\jquery-1.7.1.min.js" />
+    <Content Include="Layouts\privChecker\js\jquery-ui-1.8.17.custom.min.js" />
+    <Content Include="Layouts\privChecker\js\knockout.js" />
+    <Content Include="Layouts\privChecker\js\privChecker.js" />
+    <Content Include="Layouts\privChecker\privChecker.html" />
+    <Content Include="Ribbon\SiteActionsItem\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" />
+</Project>

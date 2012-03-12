@@ -1,0 +1,311 @@
+<html>
+    <head>
+        <script src="js/jquery-1.7.1.min.js" type="text/javascript" ></script>
+        <script src="js/jquery-ui-1.8.17.custom.min.js" type="text/javascript" ></script>
+        <script src="js/knockout.js" type="text/javascript"></script>		
+		<script src="js/datasource.js" type="text/javascript"></script>
+		
+        <link href="css/ui-lightness/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
+		<link href="css/privChecker.css" rel="stylesheet" />
+        
+        <title>PrivChecker</title>
+    </head>
+    
+    <body>
+        <div class="logo">
+            <img id="key" src="css/key.png"></img>
+            <span id="privtitle">priv</span><span id="checkertitle">checker</span>
+            <div class="subtitle">COMPLETE PERMISSION REPORTING</div>
+        </div>
+        
+		<div id="currentUser" data-bind="visible: showUser">
+			<div class="subtitle">CHECKING:</div>
+			<span data-bind="text: displayname"></span>
+		</div>
+		
+        <div id="tabs">
+
+            <ul id="tabList">
+                <li><a href="#userTab">CHOOSE<br/>USER</a></li>
+                <li><a href="#browseTab">BROWSE<br/>PRIVS</a></li>
+                <li><a href="#fullTab">FULL<br/>REPORT</a></li>
+                <li><a href="#exportTab">EXPORT<br/>REPORT</a></li>
+            </ul>
+            
+            <div id="userTab" class="tabContainer">
+
+                <div id="userSearchDiv">
+					<div id="userLabel">People</div>
+                    <input id="searchBox" value="Site Collection User..."/>
+                </div>
+
+            </div>
+            
+            <div id="browseTab" class="tabContainer">
+
+				<div id="details">
+					<div class="titlebar subtitle">
+						<span>DETAILS</span>
+					</div>
+					
+					<div id="detailsContainer">
+					
+						<!--SITE DETAILS-->
+						<span data-bind="if: tableContext() == 'sites'">
+						
+							<div class="title" data-bind="text: site().Name"></div>
+							
+							<div class="basePermissions" data-bind="foreach: site().BasePermissions">
+								<span class="basePermission" data-bind="text: $data"></span>							
+							</div>
+							<ul class="permissionLevels" data-bind="foreach: site().Permissions">
+								<li>
+									<p>
+										<em data-bind="text: Member"></em>
+										<span data-bind="text: Levels.join(' | ')"></span>
+									</p>
+								</li>					
+							</ul>						
+						</span>
+						
+						<!--LIST DETAILS-->
+						<span data-bind="if: tableContext() == 'lists'">
+						
+							<div class="title" data-bind="text: list().Name"></div>
+							
+							<div class="basePermissions" data-bind="foreach: list().BasePermissions">
+								<span class="basePermission" data-bind="text: $data"></span>							
+							</div>
+							<ul class="permissionLevels" data-bind="foreach: list().Permissions">
+								<li>
+									<p>
+										<em data-bind="text: Member"></em>
+										<span data-bind="text: Levels.join(' | ')"></span>
+									</p>
+								</li>					
+							</ul>
+												
+						</span>
+						
+						<!--LIST ITEMS DETAILS-->
+						<span data-bind="if: tableContext() == 'items'">
+						
+							<div class="title" data-bind="text: listitem().Name"></div>
+							
+							<div class="basePermissions" data-bind="foreach: listitem().BasePermissions">
+								<span class="basePermission" data-bind="text: $data"></span>							
+							</div>
+							<ul class="permissionLevels" data-bind="foreach: listitem().Permissions">
+								<li>
+									<p>
+										<em data-bind="text: Member"></em>
+										<span data-bind="text: Levels.join(' | ')"></span>
+									</p>
+								</li>					
+							</ul>
+					
+						</span>
+						
+					</div>						
+				</div>
+				
+				<div id="browseTable" data-bind="visible: sites().length > 0">
+					<div class="titleBar">
+					
+						<span class="subtitle"><a class="subtitle breadcrumb"  href="#" data-bind="text: siteCollection,
+																			click: showSites, 
+																			css: { selectedBreadcrumb: tableContext() == 'sites' }"></a></span>
+						
+						<span class="subtitle" data-bind="visible: (tableContext() == 'lists') || (tableContext() == 'items')">
+						<a class="subtitle breadcrumb"  href="#" data-bind="text: site().Name,
+																			click: showLists, 
+																			css: { selectedBreadcrumb: tableContext() == 'lists' }">
+																			</a></span>														
+						
+						<span class="subtitle" data-bind="visible: (tableContext() == 'items')">
+						<a class="subtitle breadcrumb"  href="#" data-bind="text: list().Name,
+																			click: showListItems, 
+																			css: { selectedBreadcrumb: tableContext() == 'items' }">
+																			</a></span>
+
+						<input id="browseFilter" data-bind="value: browseFilter, event: { keyup: setBrowseFilter }" />
+					</div>
+					
+					<div class="tableContainer">
+						<table class="datatable" cellspacing="0" cellpadding="4px">
+
+							<thead style="display:none">
+								<tr>
+									<th style="border-bottom: 2px solid #fff;"><span></span></th>
+									<th>
+										<a class="subtitle" href="#" data-bind="click: sortTitle">TITLE</a>
+									</th>
+									<!--<th><a class="subtitle" href="#" data-bind="click: sortRole">ACCESS</a></th>-->									
+									<th><a class="subtitle" href="#" data-bind="click: sortUrl">URL</a></th>
+									<th><span></span></th>
+		
+								</tr>
+							</thead>
+							
+							<!--SITES TABLE-->	
+							<tbody data-bind="foreach: sitesToShow, visible: tableContext() == 'sites'">													
+								<tr class="row" data-bind="click: $root.setSite, 
+												css: { selectedRow: ID == $root.site().ID, hoverRow: ID == $root.hoverRow().ID},
+												event: { mouseover: $root.setHover, mouseout: $root.removeHover}">
+									
+									<td class='iconCell' ><img class="roleImage" data-bind="attr: { 'src': 'css/' + Role + '.jpg', title:Role}"/></td>									
+									
+									<td>
+										<a class='titleLink' href="#" data-bind="text: Name, click: $root.getLists"></a>
+									</td>
+								
+									<td>
+										<a class="url" href="#" data-bind="text: Url, click: $root.goThere"></a>									
+									</td>
+									
+									<td style="width:160px">
+										<a class="subtitle" style="font-size:10px;" href="#" data-bind="click: $root.manageSitePermissions">
+                                            MANAGE PRIVS
+                                        </a>   
+                                        <img src="css/keyhole.png" class="keyhole" alt="Unique Permissions" data-bind="visible: UniquePrivs" />                                                                             
+									</td>
+									
+								</tr>								
+							</tbody>
+							
+							<!--LISTS TABLE-->
+							<tbody data-bind="foreach: listsToShow, visible: tableContext() == 'lists'">
+								<tr data-bind="click: $root.setList,
+												css: { selectedRow: ID == $root.list().ID , hoverRow: ID == $root.hoverRow().ID },
+												event: { mouseover: $root.setHover}">
+									<td class='iconCell'><img class="roleImage" data-bind="attr: { 'src': 'css/' + Role + '.jpg', title:Role}"/></td>
+									
+									<td><a class='titleLink' href="#" data-bind="text: Name, click: $root.getListItems"></a></td>
+
+									<td>
+										<a class="url" href="#" data-bind="text: Url, click: $root.goThere"></a>
+									</td>	
+
+									<td style="width:160px">
+										<a class="subtitle" style="font-size:10px;" href="#" data-bind="click: $root.manageListPermissions">
+                                            MANAGE PRIVS
+                                        </a>
+                                        <img src="css/keyhole.png" class="keyhole" alt="Unique Permissions" data-bind="visible: UniquePrivs" />
+									</td>									
+									
+								</tr>     
+							</tbody>
+
+							<!--LIST ITEMS TABLE-->
+							<tbody data-bind="foreach: itemsToShow, visible: tableContext() == 'items' ">
+								<tr data-bind="click: $root.setListItem,
+												css: { selectedRow: ID == $root.listitem().ID, hoverRow: ID == $root.hoverRow().ID }, 
+												event: { mouseover: $root.setHover}">
+									<td class='iconCell'><img class="roleImage" data-bind="attr: { 'src': 'css/' + Role + '.jpg', title:Role}"/></td>
+									<td><a class='titleLink' href="#" data-bind="text: Name"></a></td>
+
+									<td>
+										<a class="url" href="#" data-bind="text: Url, click: $root.goToListItem"></a>
+									</td>
+
+									<td style="width:160px">
+										<a class="subtitle" style="font-size:10px; width:160px" href="#" data-bind="click: $root.manageItemPermissions">
+                                            MANAGE PRIVS
+                                        </a>
+                                            <img src="css/keyhole.png" class="keyhole" alt="Unique Permissions" data-bind="visible: UniquePrivs" />
+									</td>									
+									
+								</tr>     
+							</tbody>
+
+						</table>
+					</div>
+					
+					<span id="itemCount" class="subtitle breadcrumb" style="color:#fff" data-bind="text: countText()">
+					</span>
+					
+				</div>
+
+            </div>
+            
+            <div id="fullTab" class="tabContainer">	
+            </div>
+            
+            <div id="exportTab" class="tabContainer">	
+            </div>
+            
+        </div>
+        
+		<div id="dialog-message" title="Loading..." style="display:none">
+			<p id="dialog-main">
+				Retrieving Permissions
+			</p>
+			<img src="css/loading.gif">
+		</div>
+
+		
+    </body>
+	
+	<script  type="text/javascript">
+
+		$("#tabs").tabs();
+		var url = document.URL;
+		var usersource = "usersJson.ashx?url=" + url.substring(0, url.indexOf("_layouts"));
+		$("#searchBox").autocomplete({
+		    //source: usersarray,
+		    source: usersource,
+		    minLength: 2,
+		    delay: 400,
+		    search: function () { $(this).removeClass('search').addClass('loading'); },
+		    open: function () { $(this).removeClass('loading').addClass('search'); },
+		    focus: function (event, ui) {
+		        $("#searchBox").val(ui.item.id);
+		        return false;
+		    },
+		    select: function (event, ui) {
+
+		        var webUrl = document.URL;
+		        webUrl = webUrl.substring(0, webUrl.indexOf("/_layouts"));
+		        mymodel.webUrl(webUrl);
+		        mymodel.username(ui.item.id);
+		        mymodel.displayname(ui.item.value);
+		        mymodel.getSites();
+		    }
+		}).focus(function () {
+		    if ($(this).val() == "Site Collection User...") {
+		        $(this).val("");
+		    }
+		}).blur(function () {
+		    $(this).removeClass('loading').addClass('search');
+		    if ($(this).val() == "") {
+		        $(this).val("Site Collection User...");
+		    }
+		}).focus().addClass('search');
+		
+		$("#browseFilter").focus(function() {
+			if($("#browseFilter").val() == "filter...")
+			{
+				$("#browseFilter").val("");
+			}
+		}).blur(function() {
+			if($("#browseFilter").val() == "")
+			{
+				$("#browseFilter").val("filter...");
+			}
+		});
+
+		$( "#dialog-message" ).dialog({
+				autoOpen: false,
+				height: 250,
+				modal: true
+		});
+
+        var tabHeight = $(window).height() - 120;
+        $('.tabContainer').height(tabHeight);
+        $('#browseTable').css('height', tabHeight - 44);
+        $('#details').css('height', tabHeight - 44);
+        $('.tableContainer').css('height', tabHeight - 44 - 76);
+    </script>
+	<script src="js/privChecker.js" type="text/javascript"></script>
+
+</html>
