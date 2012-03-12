@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <CustomAction
+    Id="PrivCheckerAction"
+    GroupId="SiteActions"
+    Location="Microsoft.SharePoint.StandardMenu"
+    Sequence="1000"
+    Title="privChecker"
+    Description="Check a user's permissions"
+    Rights="EnumeratePermissions"
+    ImageUrl="_layouts/privchecker/css/keyshadowed.png">
+      <UrlAction Url="~site/_layouts/privChecker/privChecker.html"/>
+  </CustomAction>
+</Elements>
