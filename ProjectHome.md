@@ -1,0 +1,1 @@
+Allows administrator to check user's permission.
